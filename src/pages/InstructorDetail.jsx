@@ -14,7 +14,7 @@ const InstructorDetail = () => {
   };
   useEffect(() => {
     getInstructors();
-  }, [id]);
+  }, []);
 
   return (
     <div className="container text-center">
@@ -30,7 +30,7 @@ const InstructorDetail = () => {
         <button onClick={() => navigate("/")} className="btn btn-success me-2">
           Home
         </button>
-        <button onClick={() => navigate(-1)} className="btn btn-warning">
+        <button onClick={() => navigate(-2)} className="btn btn-warning">
           Go Back
         </button>
       </div>
