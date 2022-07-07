@@ -1,20 +1,28 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+// import { useLocation } from 'react-router-dom';
 
 const InstructorDetail = () => {
+  //! Linkteki parametreyi almak icin useParams Hook'u kullanilabilir.
   const { id } = useParams();
+
   const navigate = useNavigate();
+
+  //! navigate ile gonderilen state(veriyi) yakalamak icin ise
+  //! useLocation Hook'u kullanilabilir.
+  // const location = useLocation();
+  // const inst = location.state;
+
   const [inst, setInst] = useState([]);
 
-  const getInstructors = () => {
+  useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => res.json())
       .then((data) => setInst(data))
       .catch((err) => console.log(err));
-  };
-  useEffect(() => {
-    getInstructors();
-  }, []);
+  }, [id]);
+
+  console.log(inst);
 
   return (
     <div className="container text-center">
@@ -27,10 +35,10 @@ const InstructorDetail = () => {
       <h4>{inst.email}</h4>
       <h4>{inst.phone}</h4>
       <div>
-        <button onClick={() => navigate("/")} className="btn btn-success me-2">
+        <button onClick={() => navigate('/')} className="btn btn-success me-2">
           Home
         </button>
-        <button onClick={() => navigate(-2)} className="btn btn-warning">
+        <button onClick={() => navigate(-1)} className="btn btn-warning">
           Go Back
         </button>
       </div>
